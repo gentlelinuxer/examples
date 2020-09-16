@@ -6,7 +6,15 @@ python:
 install: "pip install -r mnist/requirements.txt"
 
 # command to run tests
-script: python mnist/main.py
+script: python test.py
+
+# Install the codecov pip dependency
+install:
+  - pip install codecov
+
+# Run the unit test
+script:
+  - coverage run test.py
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
