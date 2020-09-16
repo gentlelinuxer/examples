@@ -11,10 +11,14 @@ script: python test.py
 # Install the codecov pip dependency
 install:
   - pip install codecov
+  - pip install pytest
+  - pip install pytest-cov
 
-# Run the unit test
-script:
-  - coverage run test.py
+test:
+    override:
+        - pytest --cov=./ ./test.py
+    post:
+        - codecov
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
